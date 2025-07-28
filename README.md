@@ -15,5 +15,11 @@ This repository contains engineering materials of a self-driven vehicle model pa
 
 ## Introduction
 
-_This part must be filled by participants with the technical clarifications about the code: which modules the code consists of, how they are related to the electromechanical components of the vehicle, and what is the process to build/compile/upload the code to the vehicle’s controllers._
+We are Huayra, a new team emerging from Roboprenr in Bangalore. A lot of development is still underway as we optimize our ideas quite frequenetly, but currently our robot has the current systems:
+1) Motor & Steering
+2) Power
+3) Microprocessor (raspberry pi) and Camera
+4) Collision prevention system with IR sensors
+
+More information coming soon!
 
