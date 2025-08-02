@@ -1,6 +1,6 @@
 # Introduction  
   
-The robot is built using a diverse set of electronic components, centered around the Raspberry Pi 5 as its primary processing unit. It features a custom DIY 2X2 steering system, and a motor connected to a differential gearbox (*A separate document will contain detailed images of the system’s operation and mechanics.*) to handle the drive mechanism. Power is sourced from a 7.4V 1000mAh 30C 2S LiPo battery, and an XL4015 step-down buck module. For visual input, the robot employs a 5MP Raspberry Pi Camera Module Rev 1.3, and is actively cooled using an official Pi 5 case fan. It also integrates a VL53L0X TOF-based LIDAR sensor for distance measurement.  
+The robot is built using a diverse set of electronic components, centered around the Raspberry Pi 5 as its primary processing unit. It features a custom DIY 2X2 steering system, and a motor connected to a differential gearbox (*A detailed document illustrating the system’s operation and mechanics is provided in `Differential_Gearbox.md`.*) to handle the drive mechanism. Power is sourced from a 7.4V 1000mAh 30C 2S LiPo battery, and an XL4015 step-down buck module. For visual input, the robot employs a 5MP Raspberry Pi Camera Module Rev 1.3, and is actively cooled using an official Pi 5 case fan. It also integrates a VL53L0X TOF-based LIDAR sensor for distance measurement.  
   
 # List of Components  
   
