@@ -24,7 +24,7 @@ The ring gear, a larger toothed gear, is directly connected to the differential 
   
 **3. Axle Shafts (Left and Right Output Shafts)**  
   
-The axle shafts are long, splined rods extending from both sides of the differential. Their crucial purpose is to transmit power from the internal spider gears directly to each wheel. During normal straight-line driving, both axle shafts rotate at equal speeds. However, when the vehicle navigates a turn, the differential allows the axle shafts to rotate at different speeds, accommodating the varying distances each wheel must travel. In our project, we will use a coupler, the 3d design of which is provided in the 'models' section as 'Coupler for gearbox.stl'
+The axle shafts are long, splined rods extending from both sides of the differential. Their crucial purpose is to transmit power from the internal spider gears directly to each wheel. During normal straight-line driving, both axle shafts rotate at equal speeds. However, when the vehicle navigates a turn, the differential allows the axle shafts to rotate at different speeds, accommodating the varying distances each wheel must travel. In our project, we will use a coupler, the 3d design of which is provided in the `models` section as `CouplerForGearbox.stl`
   
 **4. Side Gears & Spider Gears**  
   
