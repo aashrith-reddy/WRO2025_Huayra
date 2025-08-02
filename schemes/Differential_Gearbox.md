@@ -32,7 +32,7 @@ Spider gears are vital for the differential's function. Typically consisting of 
   
 # Conclusion  
   
-The output shafts of the differential gearbox are connected to two** **wheels. These wheels are mounted on the rear axle. When driving straight, both wheels receive equal torque and rotate at the same speed. When turning, the gearbox compensates automatically by allowing one wheel to rotate faster than the other.  
+The output shafts of the differential gearbox are connected to two wheels. These wheels are mounted on the rear axle. When driving straight, both wheels receive equal torque and rotate at the same speed. When turning, the gearbox compensates automatically by allowing one wheel to rotate faster than the other.  
   
 # Images  
   
