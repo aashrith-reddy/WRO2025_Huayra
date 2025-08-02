@@ -41,5 +41,5 @@ The output shafts of the differential gearbox are connected to two** **wheels. T
 ![Parts of a Differential Gearbox](Attachments/DifferentialGearbox_parts.png)  
   
 2. Functioning of a Differential Gearbox  
-  
-1. ![Functioning of a Differential Gearbox](Attachments/DifferentialGearbox_functioning.png)
+
+![Functioning of a Differential Gearbox](Attachments/DifferentialGearbox_functioning.png)
