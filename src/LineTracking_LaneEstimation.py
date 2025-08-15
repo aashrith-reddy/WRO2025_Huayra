@@ -2,11 +2,9 @@ import cv2
 import numpy as np
 from picamera2 import Picamera2
 
-# --------------------
-# PARAMETERS
-# --------------------
-REAL_LINE_THICKNESS_MM = 20.0   # WRO line thickness (mm)
-FRAME_SIZE = (640, 480)         # capture size (w, h)
+
+REAL_LINE_THICKNESS_MM = 20.0   # WRO line thickness
+FRAME_SIZE = (640, 480)         # capture size
 MIN_CONTOUR_AREA = 2000         # ignore small blobs
 SMOOTH_KERNEL = 5               # blur kernel for noise reduction
 
@@ -31,9 +29,6 @@ DRAW_COLORS = {
     "lane_center": (0, 255, 255)
 }
 
-# --------------------
-# Utility functions
-# --------------------
 def find_largest_contour(mask):
     contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     if not contours:
@@ -58,25 +53,17 @@ def estimate_distance_mm(real_width_mm, perceived_px, focal_px):
         return None
     return (real_width_mm * focal_px) / perceived_px
 
-# --------------------
-# Camera init
-# --------------------
 picam2 = Picamera2()
 config = picam2.create_preview_configuration(main={"format": "RGB888", "size": FRAME_SIZE})
 picam2.configure(config)
 picam2.start()
-
 print("Camera started. Press 'q' to quit, 'c' to calibrate focal length.")
 
-# --------------------
-# Main loop
-# --------------------
 while True:
     frame = picam2.capture_array()
     frame_bgr = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
     blurred = cv2.GaussianBlur(frame_bgr, (SMOOTH_KERNEL, SMOOTH_KERNEL), 0)
     hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
-
     detections = {}
 
     for color_name, (lower, upper) in HSV_RANGES.items():
