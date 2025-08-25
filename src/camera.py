@@ -6,7 +6,7 @@ cam.configure(cam.create_preview_configuration(main={"format":"RGB888","size":(6
 cam.start(); time.sleep(0.5)
 
 while True:
-    f = cv2.cvtColor(cam.capture_array(), cv2.COLOR_RGB2BGR)
+    f = cam.capture_array()
     cv2.imshow("Feed", f)
     if cv2.waitKey(1)&0xFF==ord('q'): break
 
