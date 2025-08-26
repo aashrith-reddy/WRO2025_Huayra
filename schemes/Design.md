@@ -1,41 +1,37 @@
-# Chassis and Structural Layout 
-  
-The foundation of the robot is a **metal base plate**, which provides mechanical strength and rigidity to support all mounted subsystems. The front section of this base is equipped with the **Steering System**. This steering assembly is actuated by a **servo motor**, which precisely controls the angular orientation of the front wheels. This servo-based control enables accurate navigation and cornering capabilities, critical for path-following algorithms and obstacle avoidance routines.  
-  
-A key design consideration in this structural setup is the robot’s **minimal ground clearance**, achieved through a **low-profile chassis configuration inspired by Formula 1 car engineering**. This design principle, drawn from the high-performance world of motorsport, enhances **aerodynamic downforce**, which in turn improves **wheel-to-ground contact** during motion. As a result, the robot benefits from significantly **increased stability**, particularly at higher speeds or during sharp directional transitions.  
-  
-# Drive Mechanism 
-  
-Positioned **directly behind the steering assembly**, the robot features a high-efficiency **motor**, which serves as the **primary source** of **mechanical power** for the drivetrain. The output shaft of the motor is **mechanically coupled to a differential gearbox**, a critical component of the drive system. The **differential gearbox** performs the essential function of **splitting torque** between the two rear wheels. It allows each wheel to rotate at a different speed while still receiving power from the same motor. This functionality becomes especially important during turning maneuvers, where the inner and outer wheels naturally travel different distances.  
-  
-By enabling differential wheel speeds, the gearbox:  
-	•	**Reduces unwanted wheel slippage**, preserving traction and improving handling.  
-	•	**Enhances turning efficiency**, allowing the robot to navigate curves smoothly and with greater precision.  
-	•	**Minimizes mechanical stress** on the drivetrain components, thereby improving long-term durability and energy efficiency. 
-  
+# Chassis and Structural Layout
+
+The foundation of the robot is a **metal base plate**, which provides mechanical strength and rigidity to support all mounted subsystems. The bottom layer of this base is equipped with the **Steering System**, actuated by a **Servo motor** that precisely controls the angular orientation of the front wheels. This servo-based control enables accurate navigation and cornering, critical for path-following algorithms and obstacle avoidance. Positioned on the same bottom layer, the **motor** is connected to a **differential gearbox**, which is securely held in place by a **3D-printed holder**. The rear wheels are also attached to the gearbox using **3D-printed couplers**. Additionally, a **3D-printed camera stand** is placed on this bottom layer, located between the motor and the steering system. The 3D-models are present in the `models` folder.
+
+A key design consideration is the robot’s **minimal ground clearance**, achieved through a **low-profile chassis configuration inspired by Formula 1 car engineering**. This design enhances **aerodynamic downforce**, improving **wheel-to-ground contact** during motion, resulting in significantly **increased stability**, particularly at higher speeds or during sharp directional transitions.
+
+---
+# Drive Mechanism
+
+Located on the bottom layer, the motor serves as the **primary source** of **mechanical power** for the drivetrain. Its output shaft is **mechanically coupled to a differential gearbox**, held by a **3D-printed mount**, which splits torque between the two rear wheels. This allows each wheel to rotate at different speeds while receiving power from the same motor, a critical feature during turning maneuvers where inner and outer wheels travel different distances. The wheels are connected to the gearbox using **3D-printed couplers**, ensuring precise alignment and durability.
+
+More about the differential gearbox is present in `Differential_Gearbox.md`.
+
+---
 # Battery Placement and Power Routing
-  
-Towards the rear corners and center of the base plate, four **metallic spacers** are mounted vertically, forming a platform to support a secondary **small metal plate**. Beneath this plate, positioned such that it is behind the motor, is the **1000mAh Battery**. This configuration keeps the battery protected and thermally isolated from heat-generating components.  
-  
-The **wiring from the battery** is carefully routed to the upper layer of the chassis, where it interfaces with an actuating switch which is intern connected to the **power distribution board**. This board is responsible for efficiently regulating and distributing electrical power to various subsystems of the robot—including the **Raspberry Pi 5**, **motors**, and other peripheral components. 
-  
-# Sensor Configuration  
-  
-The robot features a strategically arranged **three-sensor array** composed of **VL53L0X TOF (Time-of-Flight) laser distance sensors**. These compact, high-precision sensors are positioned to optimize the robot’s spatial awareness and real-time environmental perception.  
-  
-One sensor is oriented to face **directly forward**, providing accurate distance measurements along the primary axis of movement. The remaining two sensors are mounted at **45° angles** to the **front-left** and **front-right**, forming a wide-angle, triangular sensing pattern. This arrangement significantly expands the robot’s **field of view**, enabling it to monitor a broader area in front of it. The triangulated configuration allows the robot to **simultaneously detect obstacles**, measure varying distances, and estimate angles of approaching objects.  
-  
-# Control Unit and Final Layer  
-  
-The **topmost platform** of the robot, which is the most critical layer—the **electronic control and processing unit**. At the heart of this control layer lies the **Raspberry Pi 5**, which functions as the **central processing unit (CPU)** of the robot. It is responsible for executing all core decision-making algorithms.  
-  
-To ensure that the Raspberry Pi and its peripherals receive a stable and safe voltage, the control layer includes an **XL4015 DC-DC Buck Converter Module**. This component steps down the 7.4V input from the LiPo battery to the 5V required by the Raspberry Pi, while maintaining a high efficiency and current capacity. Its inclusion safeguards the sensitive electronics from voltage spikes and under-voltage conditions, both of which could otherwise result in operational instability or hardware damage. A **5MP Raspberry Pi Camera Module** is placed on a 3D printed mount, which provides the robot with **real-time visual input**. This module enables a variety of vision-based functions, such as obstacle and color detection.   
-  
-# Pictures  
- 
+
+On the bottom layer, four metallic spacers are mounted vertically at the rear corners and center, forming a platform to support a small metal plate on the next layer. This upper layer houses the **1000mAh Battery**, positioned to remain protected and thermally isolated from heat-generating components. The **wiring from the battery** is routed to the upper layer, interfacing with an actuating switch connected to the **power distribution board**. This board efficiently regulates and distributes electrical power to the **Raspberry Pi 5** and **motor**. The **Raspberry Pi 5** and **Buck Converter Module** are also placed on this upper layer, ensuring a compact and organized power management system.
+
+---
+# Sensor Configuration
+
+The robot features a **three-sensor array** of **TOF laser distance sensors**, designed to optimize spatial awareness and real-time environmental perception. One sensor faces **directly forward**, providing accurate distance measurements along the primary axis of movement. The other two sensors are mounted at **45° angles** to the **front-left** and **front-right**, forming a wide-angle, triangular sensing pattern. This configuration expands the robot’s **field of view**, enabling simultaneous obstacle detection, distance measurement, and angle estimation for approaching objects.
+
+---
+# Control Unit and Final Layer
+
+The **topmost platform** hosts the **electronic control and processing unit**. The **Raspberry Pi 5**, located on the upper layer alongside the power distribution board and buck converter, serves as the **central processing unit (CPU)**, executing core decision-making algorithms. The **Buck Converter Module** steps down the 7.4V battery input to a stable 5V for the Raspberry Pi. A **5MP Raspberry Pi Camera Module**, mounted on the **3D-printed stand** on the bottom layer, provides **real-time visual input** for vision-based functions like obstacle and color detection.
+
+---
+# Pictures
+
 1. First Layer  
 ![FirstLayer.jpg](Attachments/FirstLayer.jpg)  
 2. Second Layer  
-![SecondLayer.jpg](Attachments/SecondLayer.jpg) 
+![SecondLayer.jpg](Attachments/SecondLayer.jpg)  
 3. Circuit Diagram  
 ![CircuitDiagram.jpg](Attachments/CircuitDiagram.jpg)
