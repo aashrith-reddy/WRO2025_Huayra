@@ -19,15 +19,12 @@ This document describes how to set up all required system dependencies, Python l
     python3-smbus \
     python3-pigpio \
     python3-rpi.gpio \
-    libatlas-base-dev \
-    libopenjp2-7 \
-    libtiff5
 ```
 **3. Creating a Virtual Environment and installing all required packages via pip**
     
 ```bash
     python3 -m venv venv
-    source my_env/bin/activate
+    source venv/bin/activate
 ```
 ```bash
     pip3 install \
@@ -35,7 +32,6 @@ This document describes how to set up all required system dependencies, Python l
     RPi.GPIO \
     pigpio \
     numpy \
-    smbus2 \
     opencv-python \
     opencv-contrib-python \
     picamera2
