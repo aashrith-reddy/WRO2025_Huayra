@@ -1,5 +1,5 @@
 ## Team Members  
-- Aashrith Reddy
+- Aashrith Chittamuru
 - Daksh Singh 
 - Vatsal Abrol 
 
@@ -15,6 +15,7 @@ Our robot features a **rigid metal chassis reinforced with precision 3D-printed 
 
 ## Table of Contents  
 - **models**: contains .stl design files of all the 3d printed parts
+- **others**: contains additional documentation, such as Raspberry Pi setup and terminal usage guides, to help prepare the vehicle for the competition.
 - **schemes**: contains all the schematic diagrams and illustrates the functioning of the components used in the project
 - **src**: contains code for all components which were programmed for this competition. It also contains the final code for the competition
 - **videos**: includes two videos of the bot functioning
