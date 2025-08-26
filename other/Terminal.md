@@ -49,7 +49,7 @@ When you are finished working within the virtual environment, you can deactivate
 ```
 Navigate through: Interface Options → Enable Camera
 
-**5. Start pigpio Daemon****
+**5. Start pigpio Daemon**
 
     The pigpio daemon must be running for motor control and steering systems:
 ```bash
