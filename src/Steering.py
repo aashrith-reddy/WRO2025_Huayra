@@ -1,17 +1,15 @@
-import pigpio
+from gpiozero import Servo
+from time import sleep
 
-STEER_GPIO = 18
-STEER_CENTER_US = 1500
-STEER_RANGE_US = 500
-STEER_MAX_ANGLE = 30
+servo = Servo(17, min_pulse_width=0.0005, max_pulse_width=0.0025)
 
-pi = pigpio.pi()
-pi.set_mode(STEER_GPIO, pigpio.OUTPUT)
-pi.set_PWM_frequency(STEER_GPIO, 50)
-
-def angle_to_pulse(angle):
-    angle = max(min(angle, STEER_MAX_ANGLE), -STEER_MAX_ANGLE)
-    return STEER_CENTER_US + int((angle / STEER_MAX_ANGLE) * STEER_RANGE_US)
-
-def set_steering(angle):
-    pi.set_servo_pulsewidth(STEER_GPIO, angle_to_pulse(angle))
+try:
+    while True:
+        servo.value = -0.67
+        sleep(1)
+        servo.mid()
+        sleep(1)
+        servo.value = 0.67
+        sleep(1)
+except KeyboardInterrupt:
+    servo.mid()
