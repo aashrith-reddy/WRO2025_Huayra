@@ -1,24 +1,14 @@
-import pigpio, RPi.GPIO as GPIO
+from gpiozero import PWMOutputDevice, DigitalOutputDevice
+from time import sleep
 
-MOTOR_PWM_GPIO = 13
-MOTOR_DIR1 = 22
-MOTOR_DIR2 = 27
+dir_pin = DigitalOutputDevice(20)
+pwm_pin = PWMOutputDevice(21, frequency=1000)
 
-pi = pigpio.pi()
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(MOTOR_DIR1, GPIO.OUT)
-GPIO.setup(MOTOR_DIR2, GPIO.OUT)
-pi.set_PWM_frequency(MOTOR_PWM_GPIO, 2000)
-
-def motor_set_speed(speed):
-    s = max(min(speed, 1.0), -1.0)
-    if s >= 0:
-        GPIO.output(MOTOR_DIR1, GPIO.HIGH)
-        GPIO.output(MOTOR_DIR2, GPIO.LOW)
-    else:
-        GPIO.output(MOTOR_DIR1, GPIO.LOW)
-        GPIO.output(MOTOR_DIR2, GPIO.HIGH)
-    pi.set_PWM_dutycycle(MOTOR_PWM_GPIO, int(abs(s) * 255))
-
-def stop_motor():
-    pi.set_PWM_dutycycle(MOTOR_PWM_GPIO, 0)
+try:
+    while True:
+        dir_pin.on();  pwm_pin.value = 0.6; sleep(2)
+        pwm_pin.value = 0;   sleep(1)
+        dir_pin.off(); pwm_pin.value = 0.6; sleep(2) 
+        pwm_pin.value = 0;   sleep(1)
+except KeyboardInterrupt:
+    pwm_pin.value = 0
