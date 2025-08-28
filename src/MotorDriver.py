@@ -4,7 +4,7 @@ from time import sleep
 motor = PhaseEnableMotor(phase=17, enable=18)
 
 try:
-    print("Moving forward at 50% speed...")
+    print("Moving forward at 30% speed...")
     motor.forward(0.3)
     sleep(2)
 
