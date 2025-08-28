@@ -1,15 +1,14 @@
-from gpiozero import Servo
+from gpiozero import AngularServo
+from gpiozero.pins.lgpio import LGPIOFactory
 from time import sleep
 
-servo = Servo(17, min_pulse_width=0.0005, max_pulse_width=0.0025)
-
+factory = LGPIOFactory(chip=0)
+servo=AngularServo(23)
 try:
     while True:
-        servo.value = -0.67
+        servo.angle=30
         sleep(1)
-        servo.mid()
-        sleep(1)
-        servo.value = 0.67
+        servo.angle=-30
         sleep(1)
 except KeyboardInterrupt:
-    servo.mid()
+    servo.close()
