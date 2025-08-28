@@ -1,26 +1,16 @@
-from gpiozero import PhaseEnableMotor
+from gpiozero import DigitalOutputDevice
+from rpi_hardware_pwm import HardwarePWM
 from time import sleep
 
-motor = PhaseEnableMotor(phase=17, enable=18)
+direction = DigitalOutputDevice(17)
+pwm = HardwarePWM(pwm_channel=1, hz=18000, chip=0)
+
+direction.value = 1
+pwm.start(25)
 
 try:
-    print("Moving forward at 30% speed...")
-    motor.forward(0.3)
-    sleep(2)
+    while True:
+        pass
 
-    print("Stopping motor...")
-    motor.stop()
-    sleep(2)
-    
-    print("Moving backward at 30% speed...")
-    motor.backward(0.3)
-    sleep(2)
-
-    print("Stopping motor...")
-    motor.stop()
-
-except KeyboardInterrupt:
-    print("Interrupted by user")
-
-finally:
-    motor.close()
+except:
+    pwm.stop()
