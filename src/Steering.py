@@ -1,14 +1,19 @@
-from gpiozero import AngularServo
-from gpiozero.pins.lgpio import LGPIOFactory
+from rpi_hardware_pwm import HardwarePWM
 from time import sleep
 
-factory = LGPIOFactory(chip=0)
-servo=AngularServo(23)
+pwm = HardwarePWM(pwm_channel=0, hz=50, chip=0)
+pwm.start(5)
+
 try:
     while True:
-        servo.angle=30
-        sleep(1)
-        servo.angle=-30
-        sleep(1)
+        pwm.change_duty_cycle(5)
+        sleep(2)
+        pwm.change_duty_cycle(7.5)
+        sleep(2)
+        pwm.change_duty_cycle(9.7)
+        sleep(2)
+        pwm.change_duty_cycle(7.5)
+        sleep(2)
+
 except KeyboardInterrupt:
-    servo.close()
+    pwm.stop()
