@@ -1,14 +1,26 @@
-from gpiozero import PWMOutputDevice, DigitalOutputDevice
+from gpiozero import PhaseEnableMotor
 from time import sleep
 
-dir_pin = DigitalOutputDevice(20)
-pwm_pin = PWMOutputDevice(21, frequency=1000)
+motor = PhaseEnableMotor(phase=17, enable=18)
 
 try:
-    while True:
-        dir_pin.on();  pwm_pin.value = 0.6; sleep(2)
-        pwm_pin.value = 0;   sleep(1)
-        dir_pin.off(); pwm_pin.value = 0.6; sleep(2) 
-        pwm_pin.value = 0;   sleep(1)
+    print("Moving forward at 50% speed...")
+    motor.forward(0.3)
+    sleep(2)
+
+    print("Stopping motor...")
+    motor.stop()
+    sleep(2)
+    
+    print("Moving backward at 30% speed...")
+    motor.backward(0.3)
+    sleep(2)
+
+    print("Stopping motor...")
+    motor.stop()
+
 except KeyboardInterrupt:
-    pwm_pin.value = 0
+    print("Interrupted by user")
+
+finally:
+    motor.close()
