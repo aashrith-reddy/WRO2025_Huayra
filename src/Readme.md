@@ -202,21 +202,9 @@ pwm.start(5)
 &nbsp;&nbsp;&nbsp;•	7.5% → servo centers \
 &nbsp;&nbsp;&nbsp;•	9.7% → servo moves to right position \
 &nbsp;&nbsp;&nbsp;•	7.5% → servo centers again
-```bash
-try:
-    while True:
-        pwm.change_duty_cycle(5)
-        sleep(2)
-        pwm.change_duty_cycle(7.5)
-        sleep(2)
-        pwm.change_duty_cycle(9.7)
-        sleep(2)
-        pwm.change_duty_cycle(7.5)
-        sleep(2)
-```
 
-**5. Exit**
-&nbsp;&nbsp;&nbsp;•	When you press Ctrl + C, the program exits the loop.
+**5. Exit** \
+&nbsp;&nbsp;&nbsp;•	When you press Ctrl + C, the program exits the loop. \
 &nbsp;&nbsp;&nbsp;•	pwm.stop() disables PWM output so the pin no longer outputs a PWM signal.
 ```bash
 except KeyboardInterrupt:
@@ -279,26 +267,8 @@ pwm = HardwarePWM(pwm_channel=1, hz=18000, chip=0)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;• =0 → sets GPIO17 LOW which makes the motor driver rotate the motor backward. \
 &nbsp;&nbsp;&nbsp;•	pwm.start(30) → starts PWM with 30% duty cycle, meaning the motor gets ~30% of its speed. \
 &nbsp;&nbsp;&nbsp;•	sleep() → waits for an amount of time
-```bash
-try:
-    direction.value = 1
-    pwm.start(30)
-    print("Motor running forward at 30%...")
-    sleep(5)
 
-    pwm.stop()
-    print("Motor stopped.")
-    sleep(1)
-
-    direction.value = 0
-    pwm.start(30)
-    print("Motor running backward at 30%...")
-    sleep(5)
-
-    pwm.stop()
-    print("Motor stopped.")
-```
-**4. Exit**
+**4. Exit** \
 &nbsp;&nbsp;&nbsp;•	If you press Ctrl + C, the program exits and ensures PWM is stopped so the motor doesn’t keep running unexpectedly.
 ```bash
 except KeyboardInterrupt:
@@ -307,42 +277,109 @@ except KeyboardInterrupt:
 ```
 ---
 
-### **PID.py**
-**Features:**
-- Implements a **PID controller** for steering and/or speed control.
-- Adjustable **Kp, Ki, Kd** constants.
-- **Integrator clamping** to avoid wind-up.
-
-**Formula:** output = (Kp × error) + (Ki × ∑error × Δt) + (Kd × (error - prev_error) ÷ Δt)
-
-Where:
-- `error` = target_value − current_value
-- `Δt` = time difference between updates
-
----
-
-### **LineTracking_LaneEstimation.py**
-**Features:**
-- Detects **orange** and **blue** lane lines using HSV color thresholds.
-- Finds **largest contour** for each color.
-- Calculates **thickness in pixels** for distance estimation.
-- Computes **lane center offset** in pixels and millimeters.
-- Identifies **which color is closer** to the camera.
-
-**Key Formulas:**
-1. Distance to Line (Using Focal Length):
-   distance_mm = (real_width_mm × focal_length_px) ÷ perceived_width_px
-2. Lateral Offset (Pixels to mm):
-   lateral_offset_mm = (offset_px × distance_mm) ÷ focal_length_px
-3. Focal Length Calibration:
-   focal_length_px = (perceived_width_px × known_distance_mm) ÷ real_width_mm
----
-
-
 ### **ColorDetection.py**
-**Features:**
-- **Lane Detection**: Finds offset from center between orange and blue lines.
-- **Pillar Detection**: Identifies red and green pillars (two HSV ranges for red).
-- **Parking Marker Detection**: Finds magenta region center.
+```bash
+import cv2
+import numpy as np
+from picamera2 import Picamera2
 
+COLOR_RANGES = {
+    "orange":  (np.array([5, 120, 120]),  np.array([22, 255, 255])),
+    "blue":    (np.array([95, 80, 60]),   np.array([125, 255, 255])),
+    "red1":    (np.array([0, 150, 80]),   np.array([10, 255, 255])),
+    "red2":    (np.array([170,150,80]),   np.array([179,255,255])),
+    "green":   (np.array([40, 80, 80]),   np.array([85, 255, 255])),
+    "magenta": (np.array([140, 80, 80]),  np.array([170, 255, 255]))
+}
+
+picam2 = Picamera2()
+config = picam2.create_preview_configuration(main={"size": (640, 480)})
+picam2.configure(config)
+picam2.start()
+
+print("Press 'q' to quit")
+
+while True:
+    frame = picam2.capture_array()
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    
+    # Loop through colors and detect
+    for color, (lower, upper) in COLOR_RANGES.items():
+        if color == "red1":  
+            # Special handling for red (two ranges)
+            mask1 = cv2.inRange(hsv, COLOR_RANGES["red1"][0], COLOR_RANGES["red1"][1])
+            mask2 = cv2.inRange(hsv, COLOR_RANGES["red2"][0], COLOR_RANGES["red2"][1])
+            mask = cv2.bitwise_or(mask1, mask2)
+            display_color = (0, 0, 255)
+            label = "red"
+        else:
+            mask = cv2.inRange(hsv, lower, upper)
+            if color == "orange":  display_color = (0, 140, 255)
+            elif color == "blue": display_color = (255, 0, 0)
+            elif color == "green": display_color = (0, 255, 0)
+            elif color == "magenta": display_color = (255, 0, 255)
+            label = color
+
+        contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        for cnt in contours:
+            area = cv2.contourArea(cnt)
+            if area > 1000:  # filter noise
+                x, y, w, h = cv2.boundingRect(cnt)
+                cv2.rectangle(frame, (x, y), (x+w, y+h), display_color, 2)
+                cv2.putText(frame, label, (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, display_color, 2)
+    
+    cv2.imshow("Color Detection", frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+cv2.destroyAllWindows()
+picam2.stop()
+```
+**1. Import required Libraries** \
+&nbsp;&nbsp;&nbsp;•	cv2: for image processing, drawing, masking, contour detection, showing live video. \
+&nbsp;&nbsp;&nbsp;•	numpy: for array operations and defining HSV color bounds. \
+&nbsp;&nbsp;&nbsp;•	picamera2: to access Raspberry Pi Camera v1.3 on Raspberry Pi 5.
+```bash
+import cv2
+import numpy as np
+from picamera2 import Picamera2
+```
+**2. Define Color Ranges (in HSV)** \
+&nbsp;&nbsp;&nbsp;•	A dictionary COLOR_RANGES stores lower and upper HSV limits for orange, blue, red, green, and magenta. \
+&nbsp;&nbsp;&nbsp;•	Red uses two separate ranges (red1 and red2) because red appears at both ends of the hue scale. \
+&nbsp;&nbsp;&nbsp;•	These ranges allow easy color filtering using OpenCV’s cv2.inRange() function. \
+
+**3. Initialize the Raspberry Pi Camera** \
+&nbsp;&nbsp;&nbsp;•	Create a Picamera2() instance. \
+&nbsp;&nbsp;&nbsp;•	Configure it for preview at 640×480 resolution. \
+&nbsp;&nbsp;&nbsp;•	Start the camera so frames can be captured continuously.
+```bash
+picam2 = Picamera2()
+config = picam2.create_preview_configuration(main={"size": (640, 480)})
+picam2.configure(config)
+picam2.start()
+print("Press 'q' to quit")
+```
+**4. Main Loop** \
+&nbsp;&nbsp;&nbsp;• Capture each frame, convert it to HSV, detect colors, and draw bounding boxes \
+&nbsp;&nbsp;&nbsp;•	inRange() creates a binary mask for each color. \
+&nbsp;&nbsp;&nbsp;•	findContours() locates regions of that color. \
+&nbsp;&nbsp;&nbsp;•	Bounding boxes and labels are drawn only if the blob is large enough (area > 1000).
+
+**5. Display Results** \
+&nbsp;&nbsp;&nbsp;•	imshow() opens a live video feed with detection boxes. \
+&nbsp;&nbsp;&nbsp;•	waitKey(1) allows OpenCV to update the display and listen for keyboard input. \
+&nbsp;&nbsp;&nbsp;•	Exits loop when q is pressed.
+```bash
+    cv2.imshow("Color Detection", frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+```
+**6. Cleanup** \
+&nbsp;&nbsp;&nbsp;•	destroyAllWindows() closes any OpenCV GUI windows. \
+&nbsp;&nbsp;&nbsp;•	stop() shuts down the Pi camera properly.
+```bash
+cv2.destroyAllWindows()
+picam2.stop()
+```
 ---
