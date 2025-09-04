@@ -14,6 +14,7 @@ The robot is built using a diverse set of electronic components, centered around
 8. Compact Charger: [https://robu.in/product/b3ac-compact-balance-charger-2s-3s-lipo/](https://robu.in/product/b3ac-compact-balance-charger-2s-3s-lipo/)  
 9. Steering System: [https://hubtronics.in/diy-zx2-steering-system-car-model](https://hubtronics.in/diy-zx2-steering-system-car-model)  
 10. Motor: [https://www.amazon.in/gp/product/B0F1CL82KZ/ref=ox_sc_act_title_1?th=1](https://www.amazon.in/gp/product/B0F1CL82KZ/ref=ox_sc_act_title_1?th=1)  
-11. Wheels: [https://www.indianhobbycenter.com/products/robotic-wheel-7x2-wheel-robotic-tyre-for-robotics-diy-for-dc-gear-motor-7x2-cm](https://www.indianhobbycenter.com/products/robotic-wheel-7x2-wheel-robotic-tyre-for-robotics-diy-for-dc-gear-motor-7x2-cm)
+11. 65 mm wheels (2x): https://www.electronicscomp.com/robot-wheel-65mm-dia-x-40mm-width?srsltid=AfmBOorVXQhH05LYj05RkZREojf0p5gPTFcEUl85-rJJYaNJX-_mIs1Xuck
 12. Differential Gearbox: [https://www.amazon.in/Mirana-Spectre-4WD-Accessories-Differential/dp/B0F1CQ1T1R?source=ps-sl-shoppingads-lpcontext&ref_=fplfs&psc=1&smid=A2MWQIWQF44JBM](https://www.amazon.in/Mirana-Spectre-4WD-Accessories-Differential/dp/B0F1CQ1T1R?source=ps-sl-shoppingads-lpcontext&ref_=fplfs&psc=1&smid=A2MWQIWQF44JBM)  
 13. SanDisk microSDXC: [https://amzn.in/d/bqYYjue](https://amzn.in/d/bqYYjue)
+14. Arduino R3: https://robu.in/product/arduino-uno-r3/
