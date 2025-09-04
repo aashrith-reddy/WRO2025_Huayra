@@ -1,19 +1,15 @@
 import serial
 import time
 
-ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
+arduino = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
 time.sleep(2)
+print("Raspberry Pi ready")
 
-def send_command(cmd):
-    ser.write((cmd + '\n').encode())
-    response = ser.readline().decode().strip()
-    return response
+arduino.write(b'M')
+time.sleep(1)
 
 while True:
-    response = send_command("MAGENTA")
-    print(response)
-    time.sleep(2)
-    
-    response = send_command("RED")
-    print(response)
-    time.sleep(2)
+    if arduino.in_waiting > 0:
+        line = arduino.readline().decode('utf-8').rstrip()
+        print("Arduino says:", line)
+        time.sleep(0.1)
