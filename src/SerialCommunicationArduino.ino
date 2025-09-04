@@ -1,21 +1,19 @@
 void setup() {
-  Serial.begin(9600);  // Start serial communication at 9600 baud
+  Serial.begin(9600);
+  while (!Serial);
+  Serial.println("Connected to Raspberry Pi");
 }
 
 void loop() {
-  // Check if data is available from Raspberry Pi
   if (Serial.available() > 0) {
-    String command = Serial.readStringUntil('\n');  // Read command from Pi
+    char c = Serial.read();
+    Serial.print("Got: ");
+    Serial.println(c);
+  }
 
-    // Example: control an LED on pin 13
-    if (command == "MAGENTA") {
-      Serial.println("The color Magenta has been detected");
-    }
-    else if (command == "RED") {
-      Serial.println("The color Red has been detected");
-    }
-    else {
-      Serial.println("Unknown command: " + command);
-    }
+  static unsigned long lastTime = 0;
+  if (millis() - lastTime > 2000) {
+    Serial.println("90201-TravisScott");
+    lastTime = millis();
   }
 }
