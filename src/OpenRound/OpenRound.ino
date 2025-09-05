@@ -21,33 +21,40 @@ void setup() {
   pinMode(echoCenter, INPUT);
   pinMode(motorPWM, OUTPUT);
   pinMode(motorDir, OUTPUT);
+  while (!Serial);
+  Serial.println("Connected to Raspberry Pi");
 }
 
 void loop() {
   float distLeft = readUltrasonic(trigLeft, echoLeft);
   float distCenter = readUltrasonic(trigCenter, echoCenter);
   float distRight = readUltrasonic(trigRight, echoRight);
+  if (Serial.available() > 0) {
+    char input = Serial.read();
+    digitalWrite(motorDir, LOW);
+    analogWrite(motorPWM, 30);
 
-  digitalWrite(motorDir, LOW);
-  analogWrite(motorPWM, 30);
-
-  if (distRight>=200) {
-    if (distCenter<=30) {
-      analogWrite(motorPWM, 20);
-      steering.write(135);
-      delay(300);
-      steering.write(90);
-      analogWrite(motorPWM, 30);
-    }    
-  }
-  else if (distLeft>=200) {
-    if (distCenter<=30) {
-      analogWrite(motorPWM, 20);
-      steering.write(45);
-      delay(300);
-      steering.write(90);
-      analogWrite(motorPWM, 30);
-    }  
+    if (input=="S") {
+      while(1);
+      analogWrite(motorPWM, 0);
+    else if (distRight>=200) {
+      if (distCenter<=30) {
+        analogWrite(motorPWM, 20);
+        steering.write(135);
+        delay(300);
+        steering.write(90);
+        analogWrite(motorPWM, 30);
+      }    
+    }
+    else if (distLeft>=200) {
+      if (distCenter<=30) {
+        analogWrite(motorPWM, 20);
+        steering.write(45);
+        delay(300);
+        steering.write(90);
+        analogWrite(motorPWM, 30);
+      }  
+    }
   }
 }
 
