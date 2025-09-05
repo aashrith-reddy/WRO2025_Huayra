@@ -17,5 +17,3 @@ Each file provides visual context for the hardware and wiring.
 4. `ChassisSide.png` – Side view showing low clearance, stacked layers, and component layout.
 5. `DifferentialGearbox_functioning.png` – Diagram of torque split between rear wheels during turns.
 6. `DifferentialGearbox_parts.png` – Labeled schematic of all differential gearbox components.
-7. `CameraMount.png` – Position and mounting method for the Pi Camera Module.
-8. `RealTimeCameraVision.png` – Live Pi Camera feed with object, and distance detection overlays.
