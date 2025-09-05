@@ -4,7 +4,6 @@ This folder contains six images of our competition robot, captured from all majo
 
 ## Contents
 - **Top View** – `top.jpg`  
-- **Bottom View** – `bottom.jpg` 
 - **Front View** – `front.jpg`
 - **Rear View** – `rear.jpg`
 - **Left View** – `left.jpg`  
