@@ -6,8 +6,7 @@ import serial
 import time
 import numpy as np
 
-TurnState=""
-State=1
+laps=0
 
 arduino = serial.Serial('/dev/ttyACM0', 115200, timeout=1)
 time.sleep(2)
@@ -53,19 +52,17 @@ try:
         g_signal = [i[4] for i in g_conn_comp[2][1:] if i[4] > 8000]
         r_signal = [i[4] for i in r_conn_comp[2][1:] if i[4] > 8000]
 
-        if State==1:
-            if b_signal:
-                TurnState="Blue"
-                State=2
-            elif o_signal:
-                TurnState="Orange"
-                State=2
-        
-        elif State==2:
-            if TurnState=="Blue":
-                arduino.write(b"B")
-            elif TurnState=="Orange":
-                arduino.write(b"O")
+        if laps == 12:
+            sleep(200)
+            break
+        elif b_signal:
+            print("Blue")
+            sleep(400)
+            laps += 1
+        elif o_signal:
+            print("Orange")
+            sleep(400)
+            laps += 1
 
         cv2.imshow("Frame", frame)
         if cv2.waitKey(1) & 0xFF == 27:
