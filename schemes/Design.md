@@ -14,17 +14,17 @@ More about the differential gearbox is present in `Differential_Gearbox.md`.
 ---
 # Battery Placement and Power Routing
 
-On the bottom layer, four metallic spacers are mounted vertically at the rear corners and center, forming a platform to support a small metal plate on the next layer. This upper layer houses the **1000mAh Battery**, positioned to remain protected and thermally isolated from heat-generating components. The **wiring from the battery** is routed to the upper layer, interfacing with an actuating switch connected to the **power distribution board**. This board efficiently regulates and distributes electrical power to the **Raspberry Pi 5** and **motor**. The **Raspberry Pi 5** and **Buck Converter Module** are also placed on this upper layer, ensuring a compact and organized power management system.
+On the bottom layer, four metallic spacers are mounted vertically at the rear corners and center, forming a platform to support a small metal plate on the next layer. This upper layer houses the **2500mAh Battery**, positioned to remain protected and thermally isolated from heat-generating components. The **wiring from the battery** is routed to the upper layer, which connects to the **motor as well as the arduino**. The battery efficiently regulates and distributes electrical power to the **Arduino Uno** and **motor**. The **Raspberry Pi 5** is powered by a **lithium ion 10000 Mah power bank** and are also placed on this upper layer, ensuring a compact and organized power management system.
 
 ---
 # Sensor Configuration
 
-The robot features a **three-sensor array** of **TOF laser distance sensors**, designed to optimize spatial awareness and real-time environmental perception. One sensor faces **directly forward**, providing accurate distance measurements along the primary axis of movement. The other two sensors are mounted at **45° angles** to the **front-left** and **front-right**, forming a wide-angle, triangular sensing pattern. This configuration expands the robot’s **field of view**, enabling simultaneous obstacle detection, distance measurement, and angle estimation for approaching objects.
+The robot features a **three-sensor array** of **Ultrasonic sensors**, designed to optimize spatial awareness and real-time environmental perception. One sensor faces **directly forward**, providing accurate distance measurements along the primary axis of movement. The other two sensors are mounted at **45° angles** for the **open challenge round** forming a wide-angle, triangular sensing pattern and is mounted at **90° angles** for the **obstacle challenge round** to the **front-left** and **front-right** ensuring that it can sense all the walls in a correct manner. This configuration expands the robot’s **field of view**, enabling simultaneous obstacle detection, distance measurement, and angle estimation for approaching objects.
 
 ---
 # Control Unit and Final Layer
 
-The **topmost platform** hosts the **electronic control and processing unit**. The **Raspberry Pi 5**, located on the upper layer alongside the power distribution board and buck converter, serves as the **central processing unit (CPU)**, executing core decision-making algorithms. The **Buck Converter Module** steps down the 7.4V battery input to a stable 5V for the Raspberry Pi. A **5MP Raspberry Pi Camera Module**, mounted on the **3D-printed stand** on the bottom layer, provides **real-time visual input** for vision-based functions like obstacle and color detection.
+The **topmost platform** hosts the **electronic control and processing unit**. The **Raspberry Pi 5**, located on the upper layer alongside the battery, powerbank and the arduino uno, serves as the **central processing unit (CPU)**, executing core decision-making algorithms. The **Arduino Uno** handles the ultrasonic sensors and gives commands that executes everything in place. A **5MP Raspberry Pi Camera Module**, mounted on a metal strip on the bottom layer, provides **real-time visual input** for vision-based functions like obstacle and color detection.
 
 ---
 # Pictures
